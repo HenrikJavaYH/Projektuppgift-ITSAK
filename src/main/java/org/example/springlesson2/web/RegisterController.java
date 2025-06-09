@@ -2,13 +2,14 @@ package org.example.springlesson2.web;
 
 import jakarta.validation.Valid;
 import org.example.springlesson2.dto.EmployeeDTO;
+import org.example.springlesson2.workplace.Employee;
 import org.example.springlesson2.workplace.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class RegisterController {
@@ -32,7 +33,16 @@ public class RegisterController {
             return "register";
         }
 
+        System.out.println("Registrerar användare: " + employeeDTO.getUsername());  // Debug
+
         employeeService.register(employeeDTO);
         return "redirect:/login";
+    }
+
+    // TEST: Visa alla registrerade användare
+    @GetMapping("/users")
+    @ResponseBody
+    public List<Employee> getAllUsers() {
+        return employeeService.getAll();
     }
 }
