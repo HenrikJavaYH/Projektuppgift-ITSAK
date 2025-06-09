@@ -43,6 +43,9 @@ public class EmployeeService {
             throw new UserNotFoundException(id);
         }
         employeeRepository.deleteById(id);
+        logger.info("Tog bort användare med id: {}", id);
     }
+
+
 
 }
